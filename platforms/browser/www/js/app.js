@@ -28,9 +28,33 @@ var compiledMovieList;
 var template;
 var configuration;
 
-function startApp(){
+//onInit: top-rated page
+$$(document).on('page:init', '.page[data-name="home"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  var page = e.detail;
+  console.log(page.name);
+  document.addEventListener('deviceready', startAppTopRatedList, false);
+});
 
-	template = $$('#movie-list').html();
+//onInit: popular page
+$$(document).on('page:init', '.page[data-name="popular"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  var page = e.detail;
+  console.log(page.name);
+  document.addEventListener('deviceready', startAppPopularList, false);
+});
+
+//onInit: top-rated page
+$$(document).on('page:init', '.page[data-name="latest"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  var page = e.detail;
+  console.log(page.name);
+  document.addEventListener('deviceready', startAppLatestList, false);
+});
+
+function startAppTopRatedList(){
+
+	template = $$('#movie-list-top-rated').html();
 	compiledMovieList = Template7.compile(template);
 
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
@@ -45,10 +69,54 @@ function startApp(){
 
 			console.log(data);
 
-			$$("#movie-list").html(compiledMovieList(data));
+			$$("#movie-list-top-rated").html(compiledMovieList(data));
 
 		});
 	});
 }
 
-document.addEventListener('deviceready', startApp, false);
+function startAppPopularList(){
+
+	template = $$('#movie-list-popular').html();
+	compiledMovieList = Template7.compile(template);
+
+	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
+		configuration = data;
+
+		app.request.json(apiUrl + '/movie/popular?api_key='+apiKey+'&language=en-US&page=1', function (data) {
+
+			for(var i=0; i<data.results.length; i++)
+			{
+				data.results[i].poster_url = configuration.images.base_url + configuration.images.poster_sizes[3] + data.results[i].backdrop_path
+			}
+
+			console.log(data);
+
+			$$("#movie-list-popular").html(compiledMovieList(data));
+
+		});
+	});
+}
+
+function startAppLatestList(){
+
+	template = $$('#movie-list-latest').html();
+	compiledMovieList = Template7.compile(template);
+
+	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
+		configuration = data;
+
+		app.request.json('https://api.themoviedb.org/3/movie/latest?api_key=1f6c2b740992f9ca43b7a8c8d4f25c81&language=en-US', function (data) {
+
+			for(var i=0; i<data.results.length; i++)
+			{
+				data.results[i].poster_url = configuration.images.base_url + configuration.images.poster_sizes[3] + data.results[i].backdrop_path
+			}
+
+			console.log(data);
+
+			$$("#movie-list-latest").html(compiledMovieList(data));
+
+		});
+	});
+}
