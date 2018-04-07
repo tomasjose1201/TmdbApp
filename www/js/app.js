@@ -106,7 +106,7 @@ function startAppLatestList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json('https://api.themoviedb.org/3/movie/latest?api_key=1f6c2b740992f9ca43b7a8c8d4f25c81&language=en-US', function (data) {
+		app.request.json(apiUrl + '/movie/upcoming?api_key='+apiKey+'&language=en-US', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
