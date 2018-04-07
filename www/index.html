@@ -39,6 +39,7 @@
                 </div>
             </div>
             
+            
             <!-- Popular -->
             <div id="view-popular" class="view view-main tab tab-active">
                 <div class="page page-current" data-name="popular">
@@ -48,19 +49,13 @@
                         </div>
                     </div>
                     <div class="page-content">
-                        <div class="list links-list">
-                            <ul>
-                                {{#each products}}
-                                <li><a href="/details/{{id}}/">{{title}}</a></li>
-                                {{/each}}
-                            </ul>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
-
+            
             <!-- Top Rated -->
-            <div id="view-toprated" class="view view-main">
+            <div id="view-toprated" class="view">
                 <div data-name="home" class="page">
                     <div class="navbar">
                         <div class="navbar-inner">
@@ -87,35 +82,21 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Latest -->
-            <div id="view-latest" class="view view-main">
-                <div data-name="home" class="page">
+            <div id="view-latest" class="view">
+                <div class="page page-current" data-name="latest">
                     <div class="navbar">
-                        <div class="navbar-inner">
+                        <div class="navbar-inner sliding">
                             <div class="title">Latest</div>
                         </div>
                     </div>
                     <div class="page-content">
-
-                        <div id="movie-list">
-                            {{#each results}}
-                            <div class="card demo-card-header-pic">
-                                <div style="background-image:url({{poster_url}})" class="card-header align-items-flex-end">
-                                </div>
-                                <div class="card-content card-content-padding">
-                                    <p class="date">{{title}}</p>
-                                    <p>{{overview}}</p>
-                                </div>
-                                <div class="card-footer">
-                                </div>
-                            </div>
-                            {{/each}}
-                        </div>
-
+                        
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Cordova -->
