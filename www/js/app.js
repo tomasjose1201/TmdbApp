@@ -21,6 +21,9 @@ var topRatedView = app.views.create('#view-toprated', {
 var latestView = app.views.create('#view-latest', {
   url: '/latest/'
 });
+var searchView = app.views.create('#view-search', {
+  //url: '/search/'
+});
 
 var apiUrl = "https://api.themoviedb.org/3";
 var apiKey = "1f6c2b740992f9ca43b7a8c8d4f25c81";
@@ -44,13 +47,64 @@ $$(document).on('page:init', '.page[data-name="popular"]', function (e) {
   document.addEventListener('deviceready', startAppPopularList, false);
 });
 
-//onInit: top-rated page
+//onInit: latest page
 $$(document).on('page:init', '.page[data-name="latest"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   var page = e.detail;
   console.log(page.name);
   document.addEventListener('deviceready', startAppLatestList, false);
 });
+
+//onInit: search page
+$$(document).on('page:init', '.page[data-name="search"]', function (e) {
+
+//Este evento só é chamado quando alguma coisa é mudada dentro do formulário 
+  $$('#my-form').on('change', function (e) {
+
+  	//formData recebe um objeto com todos os inputs do formulário. Para acessar um determinado valor: formData.nameHTMLdoCampo
+  	  formData = app.form.convertToData(this);
+  	  console.log(formData);
+  	  console.log(formData.option);
+  	  console.log(formData.search);
+  	  console.log(formData.toggle);
+
+  	  //Como buscar valores do campo tipo Toggle
+  	  if(formData.toggle == 'yes') {
+  	  	console.log("Peguei o valor desse campo");
+  	  }
+
+  	  searchQuery = apiUrl + '/search/movie?api_key='+apiKey+'&language=en-US&query='+ formData.search +'&page=1&include_adult=false';
+
+  	  console.log(searchQuery);
+
+  	  document.addEventListener('deviceready', function() {
+  	  	startAppSearch(searchQuery);
+  	  }, false);
+
+	  });
+});
+
+function startAppSearch(query){
+
+	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
+		configuration = data;
+
+		app.request.json(query, function (data) {
+
+			for(var i=0; i<data.results.length; i++)
+			{
+				data.results[i].poster_url = configuration.images.base_url + configuration.images.poster_sizes[3] + data.results[i].backdrop_path
+			}
+
+			template = $$('#movie-list-search').html();
+			compiledMovieList = Template7.compile(template);
+
+			$$("#movie-list-search").html(compiledMovieList(data));
+
+		});
+	});
+}
+
 
 function startAppTopRatedList(){
 
@@ -60,7 +114,7 @@ function startAppTopRatedList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/top_rated?api_key='+apiKey+'&language=pt-BR&page=1', function (data) {
+		app.request.json(apiUrl + '/movie/top_rated?api_key='+apiKey+'&language=en-US&page=1', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
@@ -83,7 +137,7 @@ function startAppPopularList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/popular?api_key='+apiKey+'&language=pt-BR&page=1', function (data) {
+		app.request.json(apiUrl + '/movie/popular?api_key='+apiKey+'&language=en-US&page=1', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
@@ -106,7 +160,7 @@ function startAppLatestList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/upcoming?api_key='+apiKey+'&language=pt-BR', function (data) {
+		app.request.json(apiUrl + '/movie/upcoming?api_key='+apiKey+'&language=en-US', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
