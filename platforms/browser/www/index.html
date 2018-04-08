@@ -36,6 +36,10 @@
                         <i class="icon material-icons md-only">fiber_new</i>
                         <span class="tabbar-label">Latest</span>
                     </a>
+                    <a href="#view-search" class="tab-link">
+                        <i class="icon material-icons md-only">search</i>
+                        <span class="tabbar-label">Search</span>
+                    </a>
                 </div>
             </div>
             
@@ -123,6 +127,75 @@
                             {{/each}}
                         </div>
                         
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div id="view-search" class="view tab">
+                <div class="page" data-name="search">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="title">Search</div>
+                        </div>
+                    </div>
+                    <div class="page-content">
+
+                        <form id="my-form" action="index.html" method="GET" class="list form-ajax-submit-onchange">
+                          <ul>
+                            <li>
+                              <div class="item-content item-input">
+                                <div class="item-inner">
+                                  <div class="item-title item-label">Options</div>
+                                  <div class="item-input-wrap">
+                                    <select name="option">
+                                      <option value="title" selected>Title</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="item-content item-input">
+                                <div class="item-inner">
+                                  <div class="item-title item-label">Search</div>
+                                  <div class="item-input-wrap">
+                                    <input type="text" name="search" placeholder="Type your search here...">
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <!--<li>
+                              <div class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title">Adult only</div>
+                                  <div class="item-after">
+                                    <label class="toggle toggle-init">
+                                      <input type="checkbox" name="toggle" value="true"><i class="toggle-icon"></i>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>-->
+                          </ul>
+                        </form>
+
+                        <!-- usual content below -->
+                        <div id="movie-list-search">
+                            {{#each results}}
+                            <div class="card demo-card-header-pic">
+                                <div style="background-image:url({{poster_url}})" class="card-header align-items-flex-end">
+                                </div>
+                                <div class="card-content card-content-padding">
+                                    <p class="date">{{title}}</p>
+                                    <p>{{overview}}</p>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+
                     </div>
                 </div>
             </div>

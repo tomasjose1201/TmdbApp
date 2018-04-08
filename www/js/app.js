@@ -69,9 +69,13 @@ $$(document).on('page:init', '.page[data-name="search"]', function (e) {
   	  console.log(formData.toggle);
 
   	  //Como buscar valores do campo tipo Toggle
-  	  if(formData.toggle == 'yes') {
+  	  /*if(formData.toggle == 'true') {
   	  	console.log("Peguei o valor desse campo");
-  	  }
+  	  }*/
+
+  	  /*if(formData.toggle != 'true') {
+  	  	formData.toggle = 'false';
+  	  }*/
 
   	  searchQuery = apiUrl + '/search/movie?api_key='+apiKey+'&language=en-US&query='+ formData.search +'&page=1&include_adult=false';
 
