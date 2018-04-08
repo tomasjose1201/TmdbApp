@@ -1,6 +1,6 @@
 {
-  "name": "HelloCordova",
-  "short_name": "HelloCordova",
+  "name": "TMDB APP",
+  "short_name": "TMDB APP",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",

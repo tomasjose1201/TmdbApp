@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "HelloCordova",
-  "short_name": "HelloCordova",
+  "name": "TMDB APP",
+  "short_name": "TMDB APP",
   "version": "io.cordova.hellocordova",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
+  "description": "The Movie DB App - Prototipação de Aplicativos Móveis - UFPR",
+  "author": "Tomás José Alves Pinto e Wesley Maffazzolli",
   "icons": [],
   "start_url": "index.html",
   "theme_color": "#2196f3"
