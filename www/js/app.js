@@ -77,7 +77,7 @@ $$(document).on('page:init', '.page[data-name="search"]', function (e) {
   	  	formData.toggle = 'false';
   	  }*/
 
-  	  searchQuery = apiUrl + '/search/movie?api_key='+apiKey+'&language=en-US&query='+ formData.search +'&page=1&include_adult=false';
+  	  searchQuery = apiUrl + '/search/movie?api_key='+apiKey+'&language=pt-BR&query='+ formData.search +'&page=1&include_adult=false';
 
   	  console.log(searchQuery);
 
@@ -118,7 +118,7 @@ function startAppTopRatedList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/top_rated?api_key='+apiKey+'&language=en-US&page=1', function (data) {
+		app.request.json(apiUrl + '/movie/top_rated?api_key='+apiKey+'&language=pt-BR&page=1', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
@@ -141,7 +141,7 @@ function startAppPopularList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/popular?api_key='+apiKey+'&language=en-US&page=1', function (data) {
+		app.request.json(apiUrl + '/movie/popular?api_key='+apiKey+'&language=pt-BR&page=1', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
@@ -164,7 +164,7 @@ function startAppLatestList(){
 	app.request.json(apiUrl + '/configuration?api_key='+apiKey, function (data) {
 		configuration = data;
 
-		app.request.json(apiUrl + '/movie/upcoming?api_key='+apiKey+'&language=en-US', function (data) {
+		app.request.json(apiUrl + '/movie/upcoming?api_key='+apiKey+'&language=pt-BR', function (data) {
 
 			for(var i=0; i<data.results.length; i++)
 			{
